@@ -5,6 +5,15 @@ const mongoose = require('mongoose');
 const port = 3030;
 const EmployeeModel = require('./models/employee')
 
+
+// app.options('/login', (req, res) => {
+//     res.set({
+//         "Access-Control-Allow-Origin": "*",
+//         "Access-Control-Allow-Methods": "POST",
+//         "Access-Control-Allow-Headers": "Content-Type",
+//     }).status(200).end();
+// });
+
 app.use(express.json());
 app.use((req, res, next) => {
     res.set({
@@ -27,7 +36,7 @@ app.post('/login', (req, res) => {
     .then(userChek => {
         if(userChek) {
             if(userChek.password == password && userChek.userStatus == "Available") {
-                res.json({status: true, message: "Success login"})
+                res.status(200).json({status: true, message: "Success login"})
             } else {
                 res.status(400).json({status: false, message: "Uncorrect or ban login"})
             }
