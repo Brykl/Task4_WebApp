@@ -6,7 +6,7 @@ const port = 3030;
 const EmployeeModel = require('./models/employee')
 app.use(
     cors({
-    origin: "https://task4-web-app-client.vercel.app/",
+    origin: "https://task4-web-app-client-8k5etshv3-egors-projects-60635dd5.vercel.app",
 }))
 
 app.use(express.json());
