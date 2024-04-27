@@ -1,9 +1,19 @@
 {
     "version": 2,
-    "rewrites": [
+    "builds": [
+        {
+            "src": "src/main.js",
+            "use": "@vervel/node"
+        }
+    ],
+        "routes": [
       {
         "source": "/(.*)",
-        "destination": "https://task4-web-app-server.vercel.app/$1"
+        "destination": "src/main.js",
+        "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+        "headers": {
+          "Access-Control-Allow-Origin": "*"
+        }
       }
     ]
   }
