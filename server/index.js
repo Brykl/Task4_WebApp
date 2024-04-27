@@ -1,46 +1,16 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-// const cors = require('cors');
+const cors = require('cors');
 const port = 3030;
 const EmployeeModel = require('./models/employee')
-
-const allowCors = fn => async (req, res) => {
-    res.setHeader('Access-Control-Allow-Credentials', true)
-    res.setHeader('Access-Control-Allow-Origin', '*')
-    // another common pattern
-    // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
-    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
-    res.setHeader(
-      'Access-Control-Allow-Headers',
-      'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-    )
-    if (req.method === 'OPTIONS') {
-      res.status(200).end()
-      return
-    }
-    return await fn(req, res)
-  }
-  
-  const handler = (req, res) => {
-    const d = new Date()
-    res.end(d.toString())
-  }
-  
-  module.exports = allowCors(handler)
-  
+app.use(
+    cors({
+    origin: "https://task4-web-app-client.vercel.app/",
+}))
 
 app.use(express.json());
-app.use((req, res, next) => {
-    res.set({
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "*",
-        "Access-Control-Allow-Headers": "'Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token'",
-    });
 
-    next();
-});
-// app.use(cors());
 
 app.get('/', (req, res) => {
     res.send("Hello World");
