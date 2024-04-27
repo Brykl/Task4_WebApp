@@ -70,7 +70,6 @@ return (
             alignItems: 'center',
           }}
         >
-            {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
