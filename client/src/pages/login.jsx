@@ -26,15 +26,26 @@ export default function SignIn() {
       event.preventDefault();
       const data = new FormData(event.currentTarget);
       axios.post('https://task4-web-app-server.vercel.app/login', {
-            email: data.get('email'),
-            password: data.get('password')
-        })
-        .then(result => {
-            console.log(result.data);
-        })
-        .catch(err => {
-        console.log(err);
-    });
+    email: data.get('email'),
+    password: data.get('password'),
+    lastLogin: getCurrentTime(currentDate)
+}, {
+    headers: {
+        'Content-Type': 'application/json', // установите нужный заголовок Content-Type
+        // другие заголовки, если необходимо
+    }
+})
+.then(result => {
+    console.log(result);
+    if (result.data.success) {
+        navigate(`/main/${result.data.user.login}`);
+    }
+})
+.catch(err => {
+    console.error("Ошибка при отправке запроса:", err);
+    setErrorMessage(err.response.data.message);
+});
+
     };
   
   
