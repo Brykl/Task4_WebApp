@@ -27,7 +27,7 @@ app.post('/login', (req, res) => {
     .then(userChek => {
         if(userChek) {
             if(userChek.password == password && userChek.userStatus == "Available") {
-                res.status(200).json({status: true, message: "Success login"})
+                res.json({status: true, message: "Success login"})
             } else {
                 res.status(400).json({status: false, message: "Uncorrect or ban login"})
             }
